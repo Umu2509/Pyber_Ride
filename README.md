@@ -10,17 +10,10 @@ import os
 
 
 ```python
-# import file using pandas
-
+# import files
 city_data = os.path.join('raw_data', 'city_data.csv')
 ride_data = os.path.join('raw_data', 'ride_data.csv')
 
-```
-
-
-```python
-city_df = pd.read_csv(city_data)
-ride_df = pd.read_csv(ride_data)
 ```
 
 
@@ -115,100 +108,13 @@ merged_df.head()
 
 
 ```python
-#merged_df = city_df.merge(ride_df, on = 'city')
-merged_df.head()
-```
-
-
-
-
-<div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>city</th>
-      <th>driver_count</th>
-      <th>type</th>
-      <th>date</th>
-      <th>fare</th>
-      <th>ride_id</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Kelseyland</td>
-      <td>63</td>
-      <td>Urban</td>
-      <td>2016-08-19 04:27:52</td>
-      <td>5.51</td>
-      <td>6246006544795</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Kelseyland</td>
-      <td>63</td>
-      <td>Urban</td>
-      <td>2016-04-17 06:59:50</td>
-      <td>5.54</td>
-      <td>7466473222333</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Kelseyland</td>
-      <td>63</td>
-      <td>Urban</td>
-      <td>2016-05-04 15:06:07</td>
-      <td>30.54</td>
-      <td>2140501382736</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Kelseyland</td>
-      <td>63</td>
-      <td>Urban</td>
-      <td>2016-01-25 20:44:56</td>
-      <td>12.08</td>
-      <td>1896987891309</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Kelseyland</td>
-      <td>63</td>
-      <td>Urban</td>
-      <td>2016-08-09 18:19:47</td>
-      <td>17.91</td>
-      <td>8784212854829</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-```python
 #city 
 city = merged_df.groupby('city')
 
 # Avgerage 
 avg_fare = city.mean()['fare']
 
-ride_count = by_city['ride_id'].count()
+ride_count = city['ride_id'].count()
 
 # driver_count
 driver_count = city.mean()['driver_count']
@@ -222,7 +128,7 @@ city_data = pd.DataFrame({
     "Type of City": city_type
 })
 
-city_info.sort_values('Number of Drivers', ascending = False)
+city_data.sort_values('Number of Drivers', ascending = False)
 
 ```
 
@@ -693,9 +599,9 @@ city_info.sort_values('Number of Drivers', ascending = False)
 color_scheme = {'Gold':'#FFD700', 'Light Sky Blue':'#87CEFA', 'Light Coral':'#F08080'}
 
 #city categories
-rural = city_data[city_info['Type of City'] == 'Rural']
-suburban = city_data[city_info['Type of City'] == 'Suburban']
-urban = city_data[city_info['Type of City'] == 'Urban']
+rural = city_data[city_data['Type of City'] == 'Rural']
+suburban = city_data[city_data['Type of City'] == 'Suburban']
+urban = city_data[city_data['Type of City'] == 'Urban']
 
 city_color = {'Urban': color_scheme['Gold'], 'Suburban': color_scheme['Light Sky Blue'], 'Rural': color_scheme['Light Coral']}
 
@@ -722,7 +628,7 @@ plt.show()
 ```
 
 
-![png](output_6_0.png)
+![png](output_4_0.png)
 
 
 
@@ -745,7 +651,7 @@ plt.show()
 ```
 
 
-![png](output_7_0.png)
+![png](output_5_0.png)
 
 
 
@@ -761,7 +667,7 @@ plt.show()
 ```
 
 
-![png](output_8_0.png)
+![png](output_6_0.png)
 
 
 
@@ -777,5 +683,5 @@ plt.show()
 ```
 
 
-![png](output_9_0.png)
+![png](output_7_0.png)
 
